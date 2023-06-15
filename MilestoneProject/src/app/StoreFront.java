@@ -2,6 +2,12 @@ package app;
 
 import java.io.IOException;
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * Store front with status and driver
@@ -16,6 +22,11 @@ public class StoreFront {
 	static ShoppingCart shoppingCart = new ShoppingCart();
 	static Scanner scnr = new Scanner(System.in);
 //	static FileService fileService = new FileService();
+	
+	private ServerSocket serverSocket;
+	private Socket clientSocket;
+	private PrintWriter out;
+	private BufferedReader in;
 	/**
 	 * method to view the products available for purchase
 	 */
@@ -49,6 +60,23 @@ public class StoreFront {
 	 */
 	private static void returnProducts() {
 		shoppingCart.returnProduct(null);
+	}
+	
+	public void start(int port) throws IOException {
+		System.out.println("Waiting for Client connection.........");
+		serverSocket = new ServerSocket(port);
+		clientSocket = serverSocket.accept();
+		
+		System.out.println("Received connection on port: " + clientSocket.getLocalPort());
+		out = new PrintWriter(clientSocket.getOutputStream(), true);
+		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+	}
+	
+	public void cleanUp() throws IOException {
+		in.close();
+		out.close();
+		clientSocket.close();
+		serverSocket.close();
 	}
 
 /**
