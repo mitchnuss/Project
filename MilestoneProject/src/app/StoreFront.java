@@ -3,7 +3,6 @@ package app;
 import java.io.IOException;
 import java.util.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -86,16 +85,10 @@ public class StoreFront {
  * and purchase them.
  */
 	public static void main(String[] args) throws IOException{
-
-/*		
- * old method of manually adding inventory
-		inventoryManager.addProduct(new Food("Goji Berry", "bright orange-red berry that comes from a shrub native to Asia", 8.32, 496));
-		inventoryManager.addProduct(new Potion("Elixir", "Potion that grants eternal life", 3469.00, 4));
-		inventoryManager.addProduct(new Helmet("Kabuto", "Ancient Japanese war helemt", 999.99, 43));
-		inventoryManager.addProduct(new Tomahawk("Polished Tomahawk", "Benjamin Martins Tomahawk", 567.00, 1));
-		inventoryManager.addProduct(new Shield("Heater Shield", "Used in the Middle Ages by knights and soldiers", 269.00, 57));
-		inventoryManager.addProduct(new Sword("Katana", "single-edged sword used by Japanese samurai", 4420.00, 21));
-*/		
+		
+		StoreFront server = new StoreFront();
+		server.start(6666);
+	
 		inventoryManager.initializeInventoryFromFile("inventory.json");
 		System.out.println("Welcome to the Game Store \n");
 		System.out.println("Please select an option from the menu");
@@ -126,6 +119,7 @@ public class StoreFront {
 				break;
 				
 			} //scnr.close();
+			server.cleanUp();
 		}
 	}
 }
