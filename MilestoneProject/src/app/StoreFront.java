@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 /**
  * Store front with status and driver
@@ -69,6 +73,35 @@ public class StoreFront {
 		System.out.println("Received connection on port: " + clientSocket.getLocalPort());
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+	}
+	
+	public void updateInventory(String payload) {
+		try {
+			JSONObject jsonPayload = new JSONObject(payload);
+			JSONArray productsArray = jsonPayload.getJSONArray("products");
+			
+			for (int i = 0; 0 < productsArray.length(); i++) {
+				JSONObject productObj = productsArray.getJSONObject(i);
+				String name = productObj.getString("name");
+				String description = productObj.getString("description");
+				double price = productObj.getDouble("price");
+				int qty = productObj.getInt("qty");
+				
+				SalableProduct existingProduct = inventoryManager.findProductByName(name);
+				if (existingProduct != null) {
+					existingProduct.setDescription(description);
+					existingProduct.setPrice(price);
+					existingProduct.setQty(qty);
+				} else {
+					SalableProduct newProduct = new SalableProduct(name, description, price, qty);
+					inventoryManager.addProduct(newProduct);
+				}
+				
+			}
+			System.out.println("Inventory updated successfully.");
+		} catch (JSONException e) {
+			System.out.println("Invalid payload format. Update failed");
+		}
 	}
 	
 	public void cleanUp() throws IOException {
