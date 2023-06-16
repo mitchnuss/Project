@@ -23,8 +23,9 @@ public class AdminApp {
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 	}
 	
-	public String sendMessage(String msg) throws IOException {
-		out.println(msg);
+	public String sendMessage(String command, String payload) throws IOException {
+		out.println(command);
+		out.println(payload);
 		
 		return in.readLine();
 	}
@@ -39,6 +40,16 @@ public class AdminApp {
 		
 		AdminApp client = new AdminApp();
 		client.start("127.0.0.1", 6666);
+		
+		String updateCmd = "U";
+		String updatePyld = "{\"products\": [{\"name\": \"Product1\", \"description\": \"Description1\", \"price\": 10.0, \"qty\": 5}, {\"name\": \"Product2\", \"description\": \"Description2\", \"price\": 15.0, \"qty\": 3}]}";
+	    String updateResponse = client.sendMessage(updateCmd, updatePyld);
+	    System.out.println("Updated Inventory: " + updateResponse);
+	    
+	    String retrieveCmd = "R";
+	    String retrievePyld = "";
+	    String retrieveResponse = client.sendMessage(retrieveCmd, retrievePyld);
+	    System.out.println("Retrieved Inventory" + retrieveResponse);
 		
 		client.cleanUp();
 	}
