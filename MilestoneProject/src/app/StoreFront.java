@@ -77,17 +77,8 @@ public class StoreFront {
 		shoppingCart.returnProduct(null);
 	}
 
-	public void start(int port) throws IOException {
-		System.out.println("Waiting for Client connection.........");
-		serverSocket = new ServerSocket(port);
-		clientSocket = serverSocket.accept();
-
-		System.out.println("Received connection on port: " + clientSocket.getLocalPort());
-		out = new PrintWriter(clientSocket.getOutputStream(), true);
-		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-	}
 	//bootup server
-	public void start() {
+	public void start(int port) throws IOException {
 		try {
 			ServerSocket serverSocket = new ServerSocket(port);
 			System.out.println("StoreFront server started on port " + port);
