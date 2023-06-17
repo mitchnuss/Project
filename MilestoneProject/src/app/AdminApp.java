@@ -49,7 +49,7 @@ public class AdminApp {
 	    String retrieveCmd = "R";
 	    String retrievePyld = "";
 	    String retrieveResponse = client.sendMessage(retrieveCmd, retrievePyld);
-	    System.out.println("Retrieved Inventory" + retrieveResponse);
+	    System.out.println("Retrieved Inventory: " + retrieveResponse);
 		
 		client.cleanUp();
 	}
