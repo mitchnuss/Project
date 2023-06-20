@@ -1,5 +1,7 @@
 package app;
 
+import java.io.FilterInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -64,13 +66,19 @@ public class ShoppingCart<T extends SalableProduct> {
 	 * @param name of product user input
 	 * @return will return the name of the product removed
 	 */
+	
 	public void returnProduct(String name) {
-		Scanner scnr = new Scanner(System.in);
+		FilterInputStream filterInputStream = new FilterInputStream(System.in) {
+			@Override
+			public void close() throws IOException {
+			}
+		};
+		//FilterInputStream so when scanner is closed it does not quit the program and handles errors. 
+		Scanner scnr = new Scanner(filterInputStream);
 		System.out.println("Enter the name of the product you want to return: ");
 		String returnProd = scnr.nextLine();
 
 		SalableProduct productReturned = null;
-
 		for (SalableProduct product : salableProduct) {
 			if (product.getName().equalsIgnoreCase(returnProd)) {
 				productReturned = product;

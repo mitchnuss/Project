@@ -171,8 +171,7 @@ public class StoreFront {
 				System.exit(0);
 				break;
 			default:
-				System.out.println("INCORRECT CHOICE. Please select an option 1-4");
-				menuChoice = 1;
+				System.out.println("INVALID OPTION. Please select an option 1-4");
 
 			} // scnr.close();
 	//		server.cleanUp();
