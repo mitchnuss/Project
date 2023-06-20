@@ -60,7 +60,7 @@ public class ShoppingCart {
         String returnProd = scnr.nextLine();
 
         SalableProduct productReturned = returnProduct(returnProd);
-        if (productReturned == returnProduct(null)) {
+        if (productReturned == null) {
             System.out.println("Item not in cart");
         } else {
             removeItem(productReturned);
@@ -69,4 +69,5 @@ public class ShoppingCart {
         }scnr.close();
 		return null;
     }
+
 }

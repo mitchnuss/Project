@@ -41,16 +41,16 @@ public class AdminApp {
 		AdminApp client = new AdminApp();
 		client.start("127.0.0.1", 6666);
 		
+	    String retrieveCmd = "R";
+	    String retrievePyld = "";
+	    String retrieveResponse = client.sendMessage(retrieveCmd, retrievePyld);
+	    System.out.println("Retrieved Inventory: " + retrieveResponse);
+	    
 		String updateCmd = "U";
 		String updatePyld = "{\"products\": [{\"name\": \"Product1\", \"description\": \"Description1\", \"price\": 10.0, \"qty\": 5}, {\"name\": \"Product2\", \"description\": \"Description2\", \"price\": 15.0, \"qty\": 3}]}";
 	    String updateResponse = client.sendMessage(updateCmd, updatePyld);
 	    System.out.println("Updated Inventory: " + updateResponse);
 	    
-	    String retrieveCmd = "R";
-	    String retrievePyld = "";
-	    String retrieveResponse = client.sendMessage(retrieveCmd, retrievePyld);
-	    System.out.println("Retrieved Inventory: " + retrieveResponse);
-		
 		client.cleanUp();
 	}
 

@@ -79,8 +79,7 @@ public class StoreFront {
 
 	//bootup server
 	public void start(int port) throws IOException {
-		try {
-			ServerSocket serverSocket = new ServerSocket(port);
+		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			System.out.println("StoreFront server started on port " + port);
 				
 			while (true) {
@@ -140,8 +139,9 @@ public class StoreFront {
 	 */
 	public static void main(String[] args) throws IOException {
 
-//		StoreFront server = new StoreFront(0);
-//		server.start(6666);
+		StoreFront server = new StoreFront(0);
+		server.start(6666);
+		server.updateInventory(null);
 		
 
 		inventoryManager.initializeInventoryFromFile("inventory.json");
@@ -171,7 +171,7 @@ public class StoreFront {
 				break;
 
 			} // scnr.close();
-//			server.cleanUp();
+			server.cleanUp();
 		}
 	}
 }
