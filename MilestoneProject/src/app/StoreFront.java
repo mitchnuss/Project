@@ -75,7 +75,7 @@ public class StoreFront {
 	 */
 	private static void returnProducts() {
 		shoppingCart.returnProduct(null);
-	}
+	}	
 
 	//bootup server
 	public void start(int port) throws IOException {
@@ -139,9 +139,9 @@ public class StoreFront {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		StoreFront server = new StoreFront(0);
-		server.start(6666);
-		server.updateInventory(null);
+//		StoreFront server = new StoreFront(0);
+//		server.start(6666);
+//		server.updateInventory("U");
 		
 
 		inventoryManager.initializeInventoryFromFile("inventory.json");
@@ -171,7 +171,7 @@ public class StoreFront {
 				break;
 
 			} // scnr.close();
-			server.cleanUp();
+	//		server.cleanUp();
 		}
 	}
 }
