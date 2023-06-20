@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author mitch 6/4/23
  *
  */
-public class FileService {
+public class FileService <T extends SalableProduct> {
 	
 	/**
 	 * Method to load products from JSON file
@@ -45,7 +45,7 @@ public class FileService {
      * Method to save info to a JSON file
      * @param filename name of the JSON file being used and parameter that holds the info
      * @param product The different products being loaded
-     * @param append add to end of file
+     * @param append add to end of file. 
      */
    public static void saveToFile(String filename, SalableProduct product, boolean append) {
 	   PrintWriter pw;
@@ -65,3 +65,4 @@ public class FileService {
 	   }
    }
 }
+
