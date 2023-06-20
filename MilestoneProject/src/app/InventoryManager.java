@@ -74,14 +74,7 @@ public class InventoryManager {
 	 * method that sorts inventory - not in use yet
 	 */
 	public void sortInventoryByName() {
-		Collections.sort(products, Comparator.comparing(SalableProduct::getName));
-	}
-
-	/**
-	 * methods that sorts inventory by price - not in use yet
-	 */
-	public void sortInventoryByPrice() {
-		Collections.sort(products, Comparator.comparing(SalableProduct::getPrice));
+	    Collections.sort(products, Comparator.comparing(SalableProduct::getName, String.CASE_INSENSITIVE_ORDER));
 	}
 	/**
 	 * Initializes inventory from JSON file to print in console
