@@ -44,6 +44,7 @@ public class StoreFront {
 	 * method to view the products available for purchase
 	 */
 	private static void viewProducts() {
+		inventoryManager.sortInventoryByName();
 		inventoryManager.displaySalableProducts();
 	}
 
