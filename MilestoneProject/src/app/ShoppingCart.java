@@ -66,14 +66,15 @@ public class ShoppingCart<T extends SalableProduct> {
 	 * @param name of product user input
 	 * @return will return the name of the product removed
 	 */
-	
+
 	public void returnProduct(String name) {
 		FilterInputStream filterInputStream = new FilterInputStream(System.in) {
 			@Override
 			public void close() throws IOException {
 			}
 		};
-		//FilterInputStream so when scanner is closed it does not quit the program and handles errors. 
+		// FilterInputStream so when scanner is closed it does not quit the program and
+		// handles errors.
 		Scanner scnr = new Scanner(filterInputStream);
 		System.out.println("Enter the name of the product you want to return: ");
 		String returnProd = scnr.nextLine();

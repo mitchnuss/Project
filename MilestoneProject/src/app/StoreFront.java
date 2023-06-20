@@ -10,7 +10,7 @@ import java.net.Socket;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.io.FilterInputStream;
 /**
  * Store front with status and driver
  * 
@@ -24,8 +24,13 @@ public class StoreFront {
 	 */
 	static InventoryManager inventoryManager = new InventoryManager();
 	static ShoppingCart shoppingCart = new ShoppingCart();
-	static Scanner scnr = new Scanner(System.in);
-//	static FileService fileService = new FileService();
+	
+	static FilterInputStream filterInputStream = new FilterInputStream(System.in) {
+		public void close() throws IOException {
+			
+		}
+	};
+	static Scanner scnr = new Scanner(filterInputStream);
 
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
@@ -172,8 +177,8 @@ public class StoreFront {
 				break;
 			default:
 				System.out.println("INVALID OPTION. Please select an option 1-4");
-
-			} // scnr.close();
+				scnr.close();
+			} 
 	//		server.cleanUp();
 		}
 	}
