@@ -3,7 +3,6 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 /**
  * Shopping Cart Class to hold products
  * 
@@ -11,11 +10,11 @@ import java.util.Scanner;
  *         add and remove
  *
  */
-public class ShoppingCart {
+public class ShoppingCart <T extends SalableProduct> {
 	/**
 	 * list that holds all the products being sold
 	 */
-	private ArrayList<SalableProduct> salableProduct;
+	private ArrayList<T> salableProduct;
 
 	/**
 	 * Assigns items in array to variable
@@ -23,38 +22,31 @@ public class ShoppingCart {
 	public ShoppingCart() {
 		salableProduct = new ArrayList<>();
 	}
-
 	/**
 	 * adds item to products for sale
-	 * 
 	 * @param item place holder for name of product added
 	 */
-	public void addItem(SalableProduct item) {
-		salableProduct.add(item);
-	}
-
-	/**
-	 * removes item from inventory or cart
-	 * 
-	 * @param item place holder for name of product removed
-	 */
-	public void removeItem(SalableProduct item) {
-		salableProduct.remove(item);
-	}
-
-	/**
-	 * method to check out and add total with qty - to do
-	 */
-	public void checkout() {
-		// Perform checkout logic here
-	}
-
-	/**
-	 * gets list of products for sale
-	 * 
-	 * @return will return all products available for sale and inventory
-	 */
-    public List<SalableProduct> getItems() {
+    public void addItem(T item) {
+        salableProduct.add(item);
+    }
+    /**
+     * removes item from inventory or cart
+     * @param productReturned place holder for name of product removed
+     */
+    public void removeItem(SalableProduct productReturned) {
+        salableProduct.remove(productReturned);
+    }
+    /**
+     * method to check out and add total with qty - to do
+     */
+    public void checkout() {
+        // Perform checkout logic here
+    }
+    /**
+     * gets list of products for sale
+     * @return will return all products available for sale and inventory
+     */
+    public List<T> getItems() {
         return salableProduct;
     }
 
