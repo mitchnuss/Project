@@ -88,12 +88,11 @@ public class InventoryManager {
 	 * @param filename name of JSON file passed to this parameter
 	 */
 	public void initializeInventoryFromFile(String filename) {
-		ArrayList<SalableProduct> products = FileService.loadProductsFromFile("inventory.json");
+		ArrayList<SalableProduct> loadedProduct = FileService.loadProductsFromFile("inventory.json");
 
-		for (SalableProduct product : products) {
-			if (product instanceof Product) {
+		for (SalableProduct product : loadedProduct) {
 				addProduct((Product) product);
-			}
+			
 		}
 
 	}
