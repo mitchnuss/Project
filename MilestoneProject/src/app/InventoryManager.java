@@ -91,7 +91,7 @@ public class InventoryManager {
 		ArrayList<SalableProduct> loadedProduct = FileService.loadProductsFromFile("inventory.json");
 
 		for (SalableProduct product : loadedProduct) {
-				addProduct((Product) product);
+				addProduct(product);
 			
 		}
 

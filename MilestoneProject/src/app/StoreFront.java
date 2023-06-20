@@ -52,7 +52,7 @@ public class StoreFront {
 	 */
 	private static void purchaseProducts() {
 		System.out.print("Enter the name of the product you want to purchase: ");
-		// scnr.nextLine(); // Consume newline character
+		scnr.nextLine(); // Consume newline character
 		String productName = scnr.nextLine();
 
 		SalableProduct productToPurchase = inventoryManager.findProductByName(productName);
