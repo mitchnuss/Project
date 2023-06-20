@@ -170,6 +170,9 @@ public class StoreFront {
 				System.out.println("Thank you for coming by. Please come again.");
 				System.exit(0);
 				break;
+			default:
+				System.out.println("INCORRECT CHOICE. Please select an option 1-4");
+				menuChoice = 1;
 
 			} // scnr.close();
 	//		server.cleanUp();
