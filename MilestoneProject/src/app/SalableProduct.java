@@ -90,7 +90,7 @@ public class SalableProduct {
 	}
 
 	/**
-	 * 
+	 * Set Variables
 	 */
 	public SalableProduct() {
 		name = "";

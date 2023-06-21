@@ -182,9 +182,7 @@ public class StoreFront {
 	public static void main(String[] args) throws IOException {
 
 		StoreFront server = new StoreFront(0);
-		server.start(6666);
-//		server.updateInventory("U");
-		
+		server.start(6666);		
 
 		inventoryManager.initializeInventoryFromFile("inventory.json");
 		System.out.println("Welcome to the Game Store \n");
