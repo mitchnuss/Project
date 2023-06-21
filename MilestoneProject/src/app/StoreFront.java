@@ -93,7 +93,7 @@ public class StoreFront {
 				System.out.println("New Connection from " + clientSocket.getInetAddress());
 					
 				ServerThread serverThread = new ServerThread(clientSocket);
-				serverThread.start();
+				serverThread.run();
 				
 			}
 		} catch (IOException e) {
@@ -136,6 +136,42 @@ public class StoreFront {
 		clientSocket.close();
 		serverSocket.close();
 	}
+	
+	private class ServerThread extends Thread {
+		private Socket clientSocket;
+		
+		public ServerThread(Socket clientSocket) {
+			this.clientSocket = clientSocket;
+		}
+		
+		@Override
+		public void run() {
+			try (
+				PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+				BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			) {
+				String command = in.readLine();
+				String payload = in.readLine();
+				
+				if (command.equals("U")) {
+					updateInventory(payload);
+					out.println("Inventory updated successfully.");
+				} else if (command.equals("R")) {
+					//To Do create logic here for R command
+				} else {
+					out.println("Invalid Command");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					clientSocket.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	/**
 	 * main driver program
@@ -145,8 +181,8 @@ public class StoreFront {
 	 */
 	public static void main(String[] args) throws IOException {
 
-//		StoreFront server = new StoreFront(0);
-//		server.start(6666);
+		StoreFront server = new StoreFront(0);
+		server.start(6666);
 //		server.updateInventory("U");
 		
 
