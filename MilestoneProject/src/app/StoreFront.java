@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.FilterInputStream;
+
 /**
  * Store front with status and driver
  * 
@@ -24,10 +25,10 @@ public class StoreFront {
 	 */
 	static InventoryManager inventoryManager = new InventoryManager();
 	static ShoppingCart shoppingCart = new ShoppingCart();
-	
+
 	static FilterInputStream filterInputStream = new FilterInputStream(System.in) {
 		public void close() throws IOException {
-			
+
 		}
 	};
 	static Scanner scnr = new Scanner(filterInputStream);
@@ -81,20 +82,20 @@ public class StoreFront {
 	 */
 	private static void returnProducts() {
 		shoppingCart.returnProduct(null);
-	}	
+	}
 
-	//bootup server
+	// bootup server
 	public void start(int port) throws IOException {
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			System.out.println("StoreFront server started on port " + port);
-				
+
 			while (true) {
 				Socket clientSocket = serverSocket.accept();
 				System.out.println("New Connection from " + clientSocket.getInetAddress());
-					
+
 				ServerThread serverThread = new ServerThread(clientSocket);
 				serverThread.run();
-				
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -136,28 +137,26 @@ public class StoreFront {
 		clientSocket.close();
 		serverSocket.close();
 	}
-	
+
 	private class ServerThread extends Thread {
 		private Socket clientSocket;
-		
+
 		public ServerThread(Socket clientSocket) {
 			this.clientSocket = clientSocket;
 		}
-		
+
 		@Override
 		public void run() {
-			try (
-				PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			) {
+			try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+					BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));) {
 				String command = in.readLine();
 				String payload = in.readLine();
-				
+
 				if (command.equals("U")) {
 					updateInventory(payload);
 					out.println("Inventory updated successfully.");
 				} else if (command.equals("R")) {
-					//To Do create logic here for R command
+					// To Do create logic here for R command
 				} else {
 					out.println("Invalid Command");
 				}
@@ -181,39 +180,48 @@ public class StoreFront {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		StoreFront server = new StoreFront(0);
-		server.start(6666);		
-
-		inventoryManager.initializeInventoryFromFile("inventory.json");
-		System.out.println("Welcome to the Game Store \n");
-		System.out.println("Please select an option from the menu");
-		System.out.println("***************************************");
-		System.out.println("************MAIN MENU ******************\n");
 		while (true) {
-			System.out.println("Enter one of the following:\n\n" + "'1' : View Products\n" + "'2' : Purchase Products\n"
-					+ "'3' : Return Products\n" + "'4' : Exit");
+			System.out.println("Login to Admin site (1) or go to store front (2)?");
 
-			int menuChoice = scnr.nextInt();
+			int choice = scnr.nextInt();
 
-			switch (menuChoice) {
+			switch (choice) {
 			case 1:
-				viewProducts();
+				StoreFront server = new StoreFront(0);
+				server.start(6666);
 				break;
 			case 2:
-				purchaseProducts();
-				break;
-			case 3:
-				returnProducts();
-				break;
-			case 4:
-				System.out.println("Thank you for coming by. Please come again.");
-				System.exit(0);
-				break;
-			default:
-				System.out.println("INVALID OPTION. Please select an option 1-4");
-				scnr.close();
-			} 
-	//		server.cleanUp();
+				inventoryManager.initializeInventoryFromFile("inventory.json");
+				System.out.println("Welcome to the Game Store \n");
+				System.out.println("Please select an option from the menu");
+				System.out.println("***************************************");
+				System.out.println("************MAIN MENU ******************\n");
+				while (true) {
+					System.out.println("Enter one of the following:\n\n" + "'1' : View Products\n"
+							+ "'2' : Purchase Products\n" + "'3' : Return Products\n" + "'4' : Exit");
+
+					int menuChoice = scnr.nextInt();
+
+					switch (menuChoice) {
+					case 1:
+						viewProducts();
+						break;
+					case 2:
+						purchaseProducts();
+						break;
+					case 3:
+						returnProducts();
+						break;
+					case 4:
+						System.out.println("Thank you for coming by. Please come again.");
+						System.exit(0);
+						break;
+					default:
+						System.out.println("INVALID OPTION. Please select an option 1-4");
+						scnr.close();
+					}
+				} // server.cleanUp();
+			}
 		}
 	}
 }
