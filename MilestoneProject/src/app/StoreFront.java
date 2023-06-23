@@ -219,6 +219,7 @@ public class StoreFront {
 					default:
 						System.out.println("INVALID OPTION. Please select an option 1-4");
 						scnr.close();
+						break;
 					}
 				} // server.cleanUp();
 			}
