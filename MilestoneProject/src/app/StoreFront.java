@@ -32,7 +32,9 @@ public class StoreFront {
 		}
 	};
 	static Scanner scnr = new Scanner(filterInputStream);
-
+	/**
+	 * Server parameters
+	 */
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
 	private PrintWriter out;
@@ -77,11 +79,14 @@ public class StoreFront {
 		}
 
 	}
-	
+
+	/**
+	 * Method to view items in cart
+	 */
 	private static void viewCart() {
 		List cart = shoppingCart.getItems();
 		System.out.println(cart);
-		
+
 	}
 
 	/**
@@ -91,7 +96,12 @@ public class StoreFront {
 		shoppingCart.returnProduct(null);
 	}
 
-	// bootup server
+	/**
+	 * Method to start server
+	 * 
+	 * @param port port that is open for clients to connect to
+	 * @throws IOException handles exceptions
+	 */
 	public void start(int port) throws IOException {
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 			System.out.println("StoreFront server started on port " + port);
@@ -109,6 +119,11 @@ public class StoreFront {
 		}
 	}
 
+	/**
+	 * Update inventory from client
+	 * 
+	 * @param payload update inventory
+	 */
 	public void updateInventory(String payload) {
 		try {
 			JSONObject jsonPayload = new JSONObject(payload);
@@ -138,6 +153,11 @@ public class StoreFront {
 		}
 	}
 
+	/**
+	 * properly closes server
+	 * 
+	 * @throws IOException handles exceptions
+	 */
 	public void cleanUp() throws IOException {
 		in.close();
 		out.close();
@@ -145,6 +165,12 @@ public class StoreFront {
 		serverSocket.close();
 	}
 
+	/**
+	 * handles multiple connections
+	 * 
+	 * @author mitch 6/25/23
+	 *
+	 */
 	private class ServerThread extends Thread {
 		private Socket clientSocket;
 
@@ -152,6 +178,9 @@ public class StoreFront {
 			this.clientSocket = clientSocket;
 		}
 
+		/**
+		 * handles threads from admin service while running store front
+		 */
 		@Override
 		public void run() {
 			try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -196,6 +225,7 @@ public class StoreFront {
 			case 1:
 				StoreFront server = new StoreFront(0);
 				server.start(6666);
+
 				break;
 			case 2:
 				inventoryManager.initializeInventoryFromFile("inventory.json");
@@ -204,8 +234,9 @@ public class StoreFront {
 				System.out.println("***************************************");
 				System.out.println("************MAIN MENU ******************\n");
 				while (true) {
-					System.out.println("Enter one of the following:\n\n" + "'1' : View Products\n"
-							+ "'2' : Purchase Products\n" + "'3' : View Cart\n" + "'4' : Return Products\n" + "'5' : Exit");
+					System.out.println(
+							"Enter one of the following:\n\n" + "'1' : View Products\n" + "'2' : Purchase Products\n"
+									+ "'3' : View Cart\n" + "'4' : Return Products\n" + "'5' : Exit");
 
 					int menuChoice = scnr.nextInt();
 

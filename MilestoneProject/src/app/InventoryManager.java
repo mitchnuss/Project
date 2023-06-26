@@ -20,6 +20,7 @@ public class InventoryManager {
 
 	/**
 	 * add product to the array
+	 * 
 	 * @param product place holder of product name assigned
 	 */
 	public void addProduct(SalableProduct product) {
@@ -73,18 +74,20 @@ public class InventoryManager {
 	 * method that sorts inventory - not in use yet
 	 */
 	public void sortInventoryByName() {
-	    Collections.sort(products, Comparator.comparing(SalableProduct::getName, String.CASE_INSENSITIVE_ORDER));
+		Collections.sort(products, Comparator.comparing(SalableProduct::getName, String.CASE_INSENSITIVE_ORDER));
 	}
+
 	/**
 	 * Initializes inventory from JSON file to print in console
+	 * 
 	 * @param filename name of JSON file passed to this parameter
 	 */
 	public void initializeInventoryFromFile(String filename) {
 		ArrayList<SalableProduct> loadedProduct = FileService.loadProductsFromFile("inventory.json");
 
 		for (SalableProduct product : loadedProduct) {
-				addProduct(product);
-			
+			addProduct(product);
+
 		}
 
 	}

@@ -16,10 +16,21 @@ import java.util.Scanner;
  */
 public class AdminApp {
 
+	/**
+	 * variables for connections
+	 */
 	private Socket clientSocket;
 	private PrintWriter out;
 	private BufferedReader in;
 
+	/**
+	 * method to start client
+	 * 
+	 * @param ip   ip address connected to
+	 * @param port por connected to
+	 * @throws UnknownHostException handles unknown hosts
+	 * @throws IOException          handles exceptions
+	 */
 	public void start(String ip, int port) throws UnknownHostException, IOException {
 		clientSocket = new Socket(ip, port);
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -33,12 +44,24 @@ public class AdminApp {
 		return in.readLine();
 	}
 
+	/**
+	 * properly closes connection
+	 * 
+	 * @throws IOException handles exceptions
+	 */
 	public void cleanUp() throws IOException {
 		in.close();
 		out.close();
 		clientSocket.close();
 	}
 
+	/**
+	 * Driver
+	 * 
+	 * @param args params
+	 * @throws InterruptedException throws exceptions
+	 * @throws IOException          throws exception
+	 */
 	public static void main(String[] args) throws InterruptedException, IOException {
 
 		AdminApp client = new AdminApp();

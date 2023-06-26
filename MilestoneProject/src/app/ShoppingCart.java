@@ -66,7 +66,6 @@ public class ShoppingCart<T extends SalableProduct> {
 	 * @param name of product user input
 	 * @return will return the name of the product removed
 	 */
-
 	public void returnProduct(String name) {
 		FilterInputStream filterInputStream = new FilterInputStream(System.in) {
 			@Override
