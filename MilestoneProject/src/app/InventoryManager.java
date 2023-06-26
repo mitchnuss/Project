@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class InventoryManager <T extends SalableProduct> {
+public class InventoryManager {
 	/**
 	 * sets products to the list of salable products
 	 */
-	private List<T> products;
+	private List<SalableProduct> products;
 
 	/**
 	 * Array to hold the items available for sale
@@ -20,10 +20,9 @@ public class InventoryManager <T extends SalableProduct> {
 
 	/**
 	 * add product to the array
-	 * 
 	 * @param product place holder of product name assigned
 	 */
-	public void addProduct(T product) {
+	public void addProduct(SalableProduct product) {
 		products.add(product);
 	}
 
@@ -32,7 +31,7 @@ public class InventoryManager <T extends SalableProduct> {
 	 * 
 	 * @return the products available in invenotry
 	 */
-	public List<T> getInventory() {
+	public List<SalableProduct> getInventory() {
 		return products;
 	}
 
@@ -41,7 +40,7 @@ public class InventoryManager <T extends SalableProduct> {
 	 * 
 	 * @param product assigns the product to be removed
 	 */
-	public void removeProduct(T product) {
+	public void removeProduct(SalableProduct product) {
 		products.remove(product);
 	}
 
@@ -51,8 +50,8 @@ public class InventoryManager <T extends SalableProduct> {
 	 * @param name place holder for input name
 	 * @return returns the name of the product user input
 	 */
-	public T findProductByName(String name) {
-		for (T product : products) {
+	public SalableProduct findProductByName(String name) {
+		for (SalableProduct product : products) {
 			if (product.getName().equalsIgnoreCase(name)) {
 				return product;
 			}
@@ -64,7 +63,7 @@ public class InventoryManager <T extends SalableProduct> {
 	 * method to display the products with price and quantity
 	 */
 	public void displaySalableProducts() {
-		for (T product : products) {
+		for (SalableProduct product : products) {
 			System.out.println(product.getName() + " - " + product.getDescription() + " - Price: $" + product.getPrice()
 					+ " - Quantity: " + product.getQty());
 		}
@@ -81,11 +80,12 @@ public class InventoryManager <T extends SalableProduct> {
 	 * @param filename name of JSON file passed to this parameter
 	 */
 	public void initializeInventoryFromFile(String filename) {
-		 ArrayList<T> products = (ArrayList<T>) FileService.loadProductsFromFile("inventory.json");
+		ArrayList<SalableProduct> loadedProduct = FileService.loadProductsFromFile("inventory.json");
 
-		for (T product : products) {
-			addProduct( product);
+		for (SalableProduct product : loadedProduct) {
+				addProduct(product);
 			
 		}
+
 	}
 }

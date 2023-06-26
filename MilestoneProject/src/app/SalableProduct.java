@@ -98,4 +98,12 @@ public class SalableProduct {
 		price = 0;
 		qty = 0;
 	}
+	
+	@Override
+	public String toString() {
+        return "Name: " + getName() +
+                ", Description: " + getDescription() +
+                ", Price: $" + getPrice() +
+                ", Quantity: " + getQty();
+	}
 }

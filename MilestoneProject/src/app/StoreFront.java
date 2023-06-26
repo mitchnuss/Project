@@ -76,6 +76,12 @@ public class StoreFront {
 		}
 
 	}
+	
+	private static void viewCart() {
+		List cart = shoppingCart.getItems();
+		System.out.println(cart);
+		
+	}
 
 	/**
 	 * method to return the products the user inputs
@@ -198,7 +204,7 @@ public class StoreFront {
 				System.out.println("************MAIN MENU ******************\n");
 				while (true) {
 					System.out.println("Enter one of the following:\n\n" + "'1' : View Products\n"
-							+ "'2' : Purchase Products\n" + "'3' : Return Products\n" + "'4' : Exit");
+							+ "'2' : Purchase Products\n" + "'3' : View Cart\n" + "'4' : Return Products\n" + "'5' : Exit");
 
 					int menuChoice = scnr.nextInt();
 
@@ -210,9 +216,12 @@ public class StoreFront {
 						purchaseProducts();
 						break;
 					case 3:
-						returnProducts();
+						viewCart();
 						break;
 					case 4:
+						returnProducts();
+						break;
+					case 5:
 						System.out.println("Thank you for coming by. Please come again.");
 						System.exit(0);
 						break;
