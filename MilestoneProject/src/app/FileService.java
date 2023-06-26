@@ -47,7 +47,7 @@ public class FileService <T extends SalableProduct> {
      * @param product The different products being loaded
      * @param append add to end of file. 
      */
-   public static void saveToFile(String filename, SalableProduct product, boolean append) {
+   public static void saveToFile(String filename, Product product, boolean append) {
 	   PrintWriter pw;
 	   
 	   try {
