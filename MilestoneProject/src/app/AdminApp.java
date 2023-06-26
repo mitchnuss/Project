@@ -27,7 +27,7 @@ public class AdminApp {
 	 * method to start client
 	 * 
 	 * @param ip   ip address connected to
-	 * @param port por connected to
+	 * @param port port connected to
 	 * @throws UnknownHostException handles unknown hosts
 	 * @throws IOException          handles exceptions
 	 */

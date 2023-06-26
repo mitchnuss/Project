@@ -86,7 +86,6 @@ public class StoreFront {
 	private static void viewCart() {
 		List cart = shoppingCart.getItems();
 		System.out.println(cart);
-
 	}
 
 	/**
@@ -225,6 +224,7 @@ public class StoreFront {
 			case 1:
 				StoreFront server = new StoreFront(0);
 				server.start(6666);
+				server.updateInventory(null);
 
 				break;
 			case 2:
