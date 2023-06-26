@@ -69,6 +69,7 @@ public class StoreFront {
 			if (productToPurchase.getQty() > 0) {
 				shoppingCart.addItem(productToPurchase);
 				productToPurchase.setQty(productToPurchase.getQty() - 1);
+				productToPurchase.setQty1(1);
 				System.out.println("Product purchased successfully.");
 			} else {
 				System.out.println("Product is out of stock.");

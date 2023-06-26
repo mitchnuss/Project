@@ -13,6 +13,7 @@ public class SalableProduct {
 	private String description;
 	private double price;
 	private int qty;
+	private int cartQty;
 	/**
 	 * name of item
 	 * @return the name placeholder for name of item
@@ -88,6 +89,14 @@ public class SalableProduct {
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
+	
+    public int getQty1() {
+        return cartQty;
+    }
+
+    public void setQty1(int qty) {
+        cartQty = qty;
+    }
 
 	/**
 	 * Set Variables
@@ -98,12 +107,14 @@ public class SalableProduct {
 		price = 0;
 		qty = 0;
 	}
-	
+	/**
+	 * method to 
+	 */
 	@Override
 	public String toString() {
         return "Name: " + getName() +
                 ", Description: " + getDescription() +
                 ", Price: $" + getPrice() +
-                ", Quantity: " + getQty();
+                ", Quantity: " + getQty1();
 	}
 }
